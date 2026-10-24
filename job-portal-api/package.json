@@ -1,0 +1,44 @@
+{
+  "name": "job-portal-api",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Job portal REST API (NestJS + Prisma + PostgreSQL)",
+  "scripts": {
+    "build": "prisma generate && nest build",
+    "start": "nest start",
+    "start:dev": "nest start --watch",
+    "start:prod": "node dist/main.js",
+    "prisma:generate": "prisma generate",
+    "db:migrate": "prisma migrate dev",
+    "db:setup": "prisma migrate deploy && prisma generate && prisma db seed",
+    "db:seed": "prisma db seed",
+    "db:reset": "prisma migrate reset --force",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
+  },
+  "prisma": {
+    "seed": "tsx prisma/seed.ts"
+  },
+  "dependencies": {
+    "@nestjs/common": "11.2.8",
+    "@nestjs/config": "4.0.4",
+    "@nestjs/core": "11.2.8",
+    "@nestjs/platform-express": "11.2.8",
+    "@nestjs/swagger": "11.4.7",
+    "@prisma/client": "6.19.3",
+    "class-transformer": "0.5.1",
+    "class-validator": "0.14.4",
+    "reflect-metadata": "0.2.2",
+    "rxjs": "7.8.2"
+  },
+  "devDependencies": {
+    "@faker-js/faker": "10.6.0",
+    "@nestjs/cli": "11.0.24",
+    "@nestjs/schematics": "11.1.0",
+    "@types/express": "5.0.6",
+    "@types/node": "24.19.2",
+    "prisma": "6.19.3",
+    "tsx": "4.23.15",
+    "typescript": "5.9.3"
+  }
+}

@@ -1,0 +1,59 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum WorkMode {
+  ONSITE
+  HYBRID
+  REMOTE
+}
+
+enum EmploymentType {
+  FULL_TIME
+  INTERNSHIP
+  INTERNSHIP_PPO
+  CONTRACT
+}
+
+enum JobStatus {
+  OPEN
+  CLOSED
+}
+
+model Job {
+  id                  Int            @id @default(autoincrement())
+  code                String         @unique
+  title               String
+  company             String
+  industry            String
+  roleCategory        String         @map("role_category")
+  description         String
+  location            String
+  workMode            WorkMode       @map("work_mode")
+  employmentType      EmploymentType @map("employment_type")
+  requiredSkills      String[]       @map("required_skills")
+  preferredSkills     String[]       @map("preferred_skills")
+  eligibleDegrees     String[]       @map("eligible_degrees")
+  eligibleBranches    String[]       @map("eligible_branches")
+  eligibleGradYears   Int[]          @map("eligible_grad_years")
+  minCgpa             Float          @map("min_cgpa")
+  maxActiveBacklogs   Int            @map("max_active_backlogs")
+  minSchoolPct        Float?         @map("min_school_pct")
+  salaryMinLpa        Float          @map("salary_min_lpa")
+  salaryMaxLpa        Float          @map("salary_max_lpa")
+  openings            Int
+  status              JobStatus      @default(OPEN)
+  applicationDeadline DateTime       @map("application_deadline") @db.Date
+  createdAt           DateTime       @default(now()) @map("created_at")
+  updatedAt           DateTime       @updatedAt @map("updated_at")
+
+  @@index([roleCategory])
+  @@index([status])
+  @@map("jobs")
+}

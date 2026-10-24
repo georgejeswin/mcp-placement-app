@@ -1,0 +1,42 @@
+{
+  "name": "mcp-placement-app",
+  "private": true,
+  "workspaces": [
+    "job-portal-api",
+    "campus-placement-api",
+    "placement-mcp-server"
+  ],
+  "scripts": {
+    "db:setup": "npm run db:setup -w job-portal-api && npm run db:setup -w campus-placement-api",
+    "db:seed": "npm run db:seed -w job-portal-api && npm run db:seed -w campus-placement-api",
+    "build": "npm run build --workspaces",
+    "dev": "concurrently -n jobs,campus -c blue,green \"npm run start:dev -w job-portal-api\" \"npm run start:dev -w campus-placement-api\"",
+    "start": "concurrently -n jobs,campus -c blue,green \"npm run start:prod -w job-portal-api\" \"npm run start:prod -w campus-placement-api\"",
+    "mcp:inspect": "npx @modelcontextprotocol/inspector node placement-mcp-server/dist/index.js",
+    "test": "npm test -w placement-mcp-server",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
+  },
+  "devDependencies": {
+    "concurrently": "9.2.5",
+    "eslint": "9.39.5",
+    "@eslint/js": "9.39.5",
+    "typescript-eslint": "8.72.0",
+    "globals": "17.13.0",
+    "typescript": "5.9.3"
+  },
+  "allowScripts": {
+    "prisma@6.19.3": true,
+    "@prisma/client@6.19.3": true,
+    "@prisma/engines@6.19.3": true,
+    "esbuild@0.28.2": true,
+    "fsevents@2.3.3": true,
+    "@scarf/scarf": false
+  },
+  "overrides": {
+    "multer": "2.5.0",
+    "@nestjs/swagger": {
+      "js-yaml": "5.5.0"
+    }
+  }
+}

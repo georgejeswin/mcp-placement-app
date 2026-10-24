@@ -1,0 +1,46 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum PlacementStatus {
+  NOT_PLACED
+  IN_PROCESS
+  PLACED
+  OPTED_OUT
+}
+
+model Student {
+  id                 Int             @id @default(autoincrement())
+  rollNo             String          @unique @map("roll_no")
+  name               String
+  email              String          @unique
+  phone              String
+  degree             String
+  branch             String
+  graduationYear     Int             @map("graduation_year")
+  cgpa               Float
+  activeBacklogs     Int             @default(0) @map("active_backlogs")
+  tenthPct           Float           @map("tenth_pct")
+  twelfthPct         Float           @map("twelfth_pct")
+  skills             String[]
+  certifications     String[]
+  /// Array of { title, techStack: string[], description }
+  projects           Json            @default("[]")
+  internshipMonths   Int             @default(0) @map("internship_months")
+  preferredRoles     String[]        @map("preferred_roles")
+  preferredLocations String[]        @map("preferred_locations")
+  placementStatus    PlacementStatus @default(NOT_PLACED) @map("placement_status")
+  placedCompany      String?         @map("placed_company")
+  createdAt          DateTime        @default(now()) @map("created_at")
+  updatedAt          DateTime        @updatedAt @map("updated_at")
+
+  @@index([branch])
+  @@index([placementStatus])
+  @@map("students")
+}

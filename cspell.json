@@ -1,0 +1,10 @@
+{
+  "version": "0.2",
+  "language": "en",
+  "ignorePaths": ["node_modules", "dist", "**/src/generated/**", "**/prisma/migrations/**", "package-lock.json"],
+  "words": [
+    "modelcontextprotocol", "autoincrement", "cgpa", "backlogs", "nestjs", "tseslint", "nodenext",
+    "LPA", "PPO", "Onsite", "upskilling", "AIDS", "MERN", "RTOS", "VLSI", "CATIA", "OWASP", "SIEM",
+    "Tailwind", "sklearn", "Pandas", "nonce"
+  ]
+}

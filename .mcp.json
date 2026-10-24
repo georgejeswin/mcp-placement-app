@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "placement": {
+      "command": "node",
+      "args": ["placement-mcp-server/dist/index.js"],
+      "env": {
+        "JOB_PORTAL_API_URL": "http://localhost:3001",
+        "CAMPUS_API_URL": "http://localhost:3002"
+      }
+    }
+  }
+}
